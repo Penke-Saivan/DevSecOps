@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: tonyduck/backend:latest
+          image: tonyduck/backend:v1
           ports:
             - containerPort: 5000
           env:
