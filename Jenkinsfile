@@ -10,19 +10,19 @@ pipeline {
     stages {
         stage('git checkout') {
             steps {
-                git branch: 'dev', url: 'https://github.com/Penke-Saivan/DevSecOps'
+                git branch: 'live', url: 'https://github.com/Penke-Saivan/DevSecOps'
             }
         }
-        stage('Frontend COmpilation ') {
+        stage('Frontend Compilation ') {
             steps {
-                dir('/client') {
+                dir('client') {
                     sh 'find . -name "*.js" -exec node --check {} +'
                 }
             }
         }
         stage('BAckend Compilantion') {
             steps {
-                dir('/api') {
+                dir('api') {
                     sh 'find . -name "*.js" -exec node --check {} +'
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
 
         stage('SonarQube-Scanner-Agent') {
             steps {
-                withSonarQubeEnv(credentialsId: 'sonar-secret') {
+                withSonarQubeEnv('sonar-server') {
                     // some block
                     sh """ $SCANNER_HOME/bin/sonar-scanner  -Dsonar.projectName=NodeJS-Project \
                      -Dsonar.projectKey=NodeJS-Project"""
